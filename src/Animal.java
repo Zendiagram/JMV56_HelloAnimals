@@ -13,6 +13,8 @@ public abstract class Animal {
 		
 	}
 	
+	//added a few gets below to add info to my outputs 
+	
 	public void eat(){
 		weight = weight+1;
 	}
@@ -37,7 +39,7 @@ public abstract class Animal {
 		return minimumWeight;
 	}
 	
-	public void setWeight(int sWeight){
+	public void setWeight(int sWeight){  //to be used when animals move
 		weight = sWeight;
 	}
 
@@ -45,7 +47,8 @@ public abstract class Animal {
 		return "This " + getType() + " is " + getAge() + " year(s) old and weighs " + getWeight() + " lbs.";
 				
 	}
-	
+
+//main method will test all code I wrote
 	public static void main(String [] args) {
 		
 		Fish animal1 = new Fish("1","gold","fish",5,1);
@@ -58,13 +61,16 @@ public abstract class Animal {
 		aList.add(animal1);
 		aList.add(animal2);
 		aList.add(animal3);
-		
+
+//print out the contents of the array list using the output method.  Do this after every change so that we can observe the changes.
 		for (int i = 0; i < aList.size(); i++) {
 			if (aList.get(i) != null) {
 				System.out.println(aList.get(i).output());
 			}
 		}
+
 		
+//test methods specific to the sub classes
 		animal1.swim();  //the fish swims a bit
 		animal2.run();  //the mammal runs a bit
 		animal3.fly();  //the bird flys a bit
@@ -76,14 +82,17 @@ public abstract class Animal {
 		}
 		
 		System.out.println("All of the animal lost a bit of weight by moving!");
-		
+
+//fed of each of the animals using eat
 		for (int i = 0; i < aList.size(); i++) {
 			if (aList.get(i) != null) {
 				aList.get(i).eat();
 			}
 				
 		}
+
 		
+//check the current state again
 		for (int i = 0; i < aList.size(); i++) {
 			if (aList.get(i) != null) {
 				System.out.println(aList.get(i).output());
@@ -105,10 +114,12 @@ public abstract class Animal {
 	private int minimumWeight;
 }
 
+
+//Fish class
 class Fish extends Animal{
 	public Fish(String aAge, String aColor, String aType, int aWeight, int aMinimumWeight) {
 		super (aAge, aColor, aType, aWeight, aMinimumWeight);
-		aType = "fish";			
+		aType = "fish";  //I decided to just set this variable after the fact.  I am not sure if there is a more eloquent way of doing this.			
 	}
 	
 	public void swim() {
@@ -126,6 +137,8 @@ class Fish extends Animal{
 	}	
 }
 
+
+//Mammal class
 class Mammal extends Animal{
 	public Mammal(String aAge, String aColor, String aType, int aWeight, int aMinimumWeight) {
 		super (aAge, aColor, aType, aWeight, aMinimumWeight);
@@ -147,6 +160,7 @@ class Mammal extends Animal{
 	}	
 }
 
+//Bird class
 class Bird extends Animal{
 	public Bird(String aAge, String aColor, String aType, int aWeight, int aMinimumWeight) {
 		super (aAge, aColor, aType, aWeight, aMinimumWeight);
