@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 
-public class Animal { 
+public abstract class Animal { 
 	
 	public Animal(String aAge, String aColor, String aType, int aWeight, int aMinimumWeight){
 			
@@ -14,7 +14,19 @@ public class Animal {
 	}
 	
 	public void eat(){
-		weight = weight++;
+		weight = weight+1;
+	}
+	
+	public String getAge() {
+		return age;
+	}
+	
+	public String getColor() {
+		return color;
+	}
+	
+	public String getType() {
+		return type;
 	}
 	
 	public int getWeight(){
@@ -30,23 +42,56 @@ public class Animal {
 	}
 
 	public String output(){
-		// gonna put something here at some point
-		String a = new String();
-				a = "This is a placeholder";
-				
-		return a;
+		return "This " + getType() + " is " + getAge() + " year(s) old and weighs " + getWeight() + " lbs.";
 				
 	}
 	
 	public static void main(String [] args) {
 		
-		Animal animal1 = new Animal("4","Brown","Horse",120,60);
+		Fish animal1 = new Fish("1","gold","fish",5,1);
+		Mammal animal2 = new Mammal("15","brown","mammal",90,45);
+		Bird animal3 = new Bird("8","red","bird",10,4);
 		
-		ArrayList<Animal> aList = new ArrayList<Animal>();
+		
+		ArrayList <Animal> aList = new ArrayList<Animal>();
 		
 		aList.add(animal1);
+		aList.add(animal2);
+		aList.add(animal3);
 		
-		System.out.println(animal1.weight + animal1.age + animal1.color + animal1.type);
+		for (int i = 0; i < aList.size(); i++) {
+			if (aList.get(i) != null) {
+				System.out.println(aList.get(i).output());
+			}
+		}
+		
+		animal1.swim();  //the fish swims a bit
+		animal2.run();  //the mammal runs a bit
+		animal3.fly();  //the bird flys a bit
+		
+		for (int i = 0; i < aList.size(); i++) {
+			if (aList.get(i) != null) {
+				System.out.println(aList.get(i).output());
+			}
+		}
+		
+		System.out.println("All of the animal lost a bit of weight by moving!");
+		
+		for (int i = 0; i < aList.size(); i++) {
+			if (aList.get(i) != null) {
+				aList.get(i).eat();
+			}
+				
+		}
+		
+		for (int i = 0; i < aList.size(); i++) {
+			if (aList.get(i) != null) {
+				System.out.println(aList.get(i).output());
+			}
+		}
+		
+		System.out.println("The animals were fed and gained some weight back!");
+		
 	}
 	
 	
@@ -66,16 +111,16 @@ class Fish extends Animal{
 		aType = "fish";			
 	}
 	
-	public void swim(Fish fish1) {
-		Fish f1 = fish1;
-		int fishWeight = f1.getWeight();
-		int fishMin = f1.getMinWeight();
+	public void swim() {
+		int fishWeight = getWeight();
+		int fishMin = getMinWeight();
 		
-		if (fishWeight <= fishMin) {
+		if (fishWeight <= fishMin) {  //catch if there is not enough weight left to support movement
 			System.out.println("The fish needs to eat before it can swim more!");
 		}
 		else {
-			f1.setWeight(fishWeight--);
+			setWeight(fishWeight-1);
+			System.out.println("The fish swam a bit an lost some weight!");
 		}	
 		
 	}	
@@ -87,16 +132,16 @@ class Mammal extends Animal{
 		aType = "mammal";			
 	}
 	
-	public void run(Mammal mammal1) {
-		Mammal m1 = mammal1;
-		int mamWeight = m1.getWeight();
-		int mamMin = m1.getMinWeight();
+	public void run() {
+		int mamWeight = getWeight();
+		int mamMin = getMinWeight();
 		
 		if (mamWeight <= mamMin) {
 			System.out.println("The mammal needs to eat before it can run more!");
 		}
 		else {
-			m1.setWeight(mamWeight--);
+			setWeight(mamWeight-1);
+			System.out.println("The mammal ran a bit an lost some weight!");
 		}	
 		
 	}	
@@ -108,17 +153,17 @@ class Bird extends Animal{
 		aType = "bird";			
 	}
 	
-	public void fly(Bird brd1) {
-		Bird b1 = brd1;
-		int brdWeight = b1.getWeight();
-		int brdMin = b1.getMinWeight();
+	public void fly() {
+		int brdWeight = getWeight();
+		int brdMin = getMinWeight();
 		
 		if (brdWeight <= brdMin) {
 			System.out.println("The bird needs to eat before it can fly more!");
 		}
 		else {
-			b1.setWeight(brdWeight--);
-		}	
+			setWeight(brdWeight-2);
+			System.out.println("The bird flew a bit an lost some weight!");
+		}
 		
 	}	
 }
